@@ -1,0 +1,59 @@
+import pepita.*
+test "Ejercicio 1 - comportamiento básico de pepita" {
+  pepita.setEnergy(100)
+
+  pepita.volar(200)
+  assert.equals(70, pepita.energy())
+  assert.that(!pepita.cansada())
+
+  pepita.volar(350)
+  assert.equals(25, pepita.energy())
+  assert.that(pepita.cansada())
+
+  pepita.descansar()
+  assert.equals(35, pepita.energy())
+  assert.that(!pepita.cansada())
+}
+
+test "Ejercicio 2 - pepita come alpiste" {
+  pepita.setEnergy(100)
+
+  pepita.volar(900)
+  assert.equals(0, pepita.energy())
+  assert.that(pepita.cansada())
+
+  pepita.comer(alpiste)
+  assert.equals(25, pepita.energy())
+  assert.that(pepita.cansada())
+
+  pepita.comer(alpiste)
+  assert.equals(50, pepita.energy())
+  assert.that(!pepita.cansada())
+}
+
+test "Ejercicio 3 - pepita come manzana" {
+  pepita.setEnergy(100)
+
+  manzana.modificarMaduramiento(2)
+  pepita.comer(manzana)
+  assert.equals(140, pepita.energy())
+
+  manzana.modificarMaduramiento(3)
+  pepita.comer(manzana)
+  assert.equals(140, pepita.energy())
+}
+
+test "Ejercicio 3 - combinando volar y comer" {
+  pepita.setEnergy(100)
+
+  pepita.volar(300)
+  assert.equals(60, pepita.energy())
+
+  manzana.modificarMaduramiento(1)
+  pepita.comer(manzana)
+  assert.equals(80, pepita.energy())
+
+  pepita.volar(400)
+  assert.equals(30, pepita.energy())
+  assert.that(!pepita.cansada())
+}
